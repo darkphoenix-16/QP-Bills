@@ -18,10 +18,10 @@ export function HomeScreen() {
             <Text style={{ fontFamily: Theme.fonts.text900, fontSize:15}}>QP-Bills</Text>
           </View>
           <Card style={{backgroundColor:"grey"}}>
-            <Card.Cover source={{uri : 'https://cdn.pixabay.com/photo/2016/09/16/09/21/money-1673582_1280.png'}}/>
+            <Card.Cover source={{uri : "https://i.pinimg.com/564x/65/c1/14/65c11480c77453a1fbc93367e7c87463.jpg"}}/>
           </Card>
           {/* { isSwitchOn ? style= Theme.colors.light : style=Theme.colors.dark} */}
-          <Card style={{ marginVertical: 25, backgroundColor:"#72408375", }}>
+          <Card style={{ marginVertical: 25, backgroundColor:"#ae54cb93", }}>
             <Card.Title title="QP- Bills" subtitle="A Fin-Tech Company" />
             <Card.Content>
               <Text variant="bodyMedium">"Welcome to QP Bills, your trusted partner in streamlined financial transactions!

@@ -6,8 +6,8 @@ import { SignUp } from './Framework/Screens/SignUp';
 export default function App() {
   return (
     <View style={{flex:1}}>
-      {/* <HomeScreen/> */}
-      <Login/>
+      <HomeScreen/>
+      {/* <Login/> */}
       {/* <SignUp/> */}
     </View>
   );
