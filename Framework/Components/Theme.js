@@ -15,6 +15,12 @@ export const Theme = {
         lightGreen: "#E9F9EF",
         red: "#EF4444",
         gray: "#808080",
+    
+        bg: "#ffffff",
+        bg2: "#f0f0f0",
+        text1: "#000000e2",
+        text2: "#00000099",
+        border: "rgba(0,0,0,0.1)",
 
         light: {
             layer: "#f8f8f8",
