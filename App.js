@@ -9,6 +9,7 @@ Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_800
 } from "@expo-google-fonts/montserrat"
 import { Theme } from './Framework/Components/Theme';
 import { useCallback, useEffect, useState } from 'react';
+import { StackNavigator } from './Framework/Navigation/Stack';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -47,11 +48,9 @@ export default function App() {
   }
 
   return (
-    <View style={{flex:1}}>
-      <HomeScreen/>
-      {/* <Login/> */}
-      {/* <SignUp/> */}
-    </View>
+    <>
+   <StackNavigator/>
+    </>
   );
 }
 
