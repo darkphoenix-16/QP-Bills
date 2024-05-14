@@ -10,7 +10,9 @@ export  function ForgottenPassword({navigation}) {
     <View style={styles.container}>   
       <Button mode='text'style={{alignSelf:"flex-start"}} onPress={()=>{navigation.navigate("IntroScreen")}} >intro</Button>
       <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
-        <Text style={{ fontSize: 35, textAlign: "center", marginTop: 160, fontFamily:Theme.fonts.text600 }}>Forgot password</Text>
+      <View style={{flex:1, justifyContent:'center'}}>
+
+        <Text style={{ fontSize: 35, textAlign: "center", fontFamily:Theme.fonts.text600 }}>Forgot password</Text>
         <Text style={{fontFamily:Theme.fonts.text300, marginVertical:10, fontSize:13}}>Enter your email below to receive password reset instructions</Text>
         <View style={styles.label}>
         <Text style={{fontFamily:Theme.fonts.text500}}>E-Mail :</Text>
@@ -20,6 +22,7 @@ export  function ForgottenPassword({navigation}) {
           </View>
           <Button mode='contained-tonal' buttonColor={Theme.colors.primary + 20}>Submit</Button>
           <Button mode='text' style={{marginTop:12}} onPress={()=>{navigation.navigate("Login")}}>Back to Log In</Button>
+          </View>
     </View>
     </SafeAreaView>
   )
@@ -34,7 +37,8 @@ const styles = StyleSheet.create({
   input: {
     borderColor: Theme.colors.primary,
     borderWidth: 1,
-    padding: 3,
+    padding: 5,
+    paddingHorizontal:15,
     borderRadius: 30,
     fontSize: 15,
   },

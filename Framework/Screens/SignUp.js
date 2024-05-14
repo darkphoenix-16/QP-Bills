@@ -11,7 +11,9 @@ export function SignUp({navigation}) {
         
       <Button mode='text'style={{alignSelf:"flex-start"}} onPress={()=>{navigation.navigate("IntroScreen")}} >intro</Button>
           <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
-        <Text style={{ fontSize: 35, textAlign: "center", marginTop: 160, fontFamily:Theme.fonts.text600 }}>Create Account</Text>
+          <View style={{flex:1, justifyContent:"center",}}>
+
+        <Text style={{ fontSize: 35, textAlign: "center", fontFamily:Theme.fonts.text600 }}>Create Account</Text>
         <View style={styles.label}>
         <Text style={{fontFamily:Theme.fonts.text500}}>Full Name :</Text>
         <TextInput
@@ -29,12 +31,13 @@ export function SignUp({navigation}) {
           />
           </View>
 
-          <View style={styles.label}>
+          <View style={[styles.label, {}]}>
         <Text style={{fontFamily:Theme.fonts.text500}}>Username :</Text>
         <TextInput
           // placeholder='Enter Username'
           placeholderTextColor={"gray"}
           style={styles.input}
+          
           />
           </View>
 
@@ -42,7 +45,7 @@ export function SignUp({navigation}) {
         <Text style={{fontFamily:Theme.fonts.text500}}>Password :</Text>
         <TextInput
           // placeholder='Enter Password'
-          placeholderTextColor={"gray"}
+          // placeholderTextColor={"gray"}
           style={styles.input}
           />
           </View>
@@ -51,6 +54,7 @@ export function SignUp({navigation}) {
         <Text style={{ fontSize: 15, marginVertical:30, fontFamily:Theme.fonts.text300}}>Im already a user</Text>
         <Button mode='text' onPress={()=>{navigation.navigate("Login")}}>Log In</Button>
         </View>
+</View>
       </View>
     </SafeAreaView>
   )
@@ -66,9 +70,10 @@ const styles = StyleSheet.create({
   input: {
     borderColor: Theme.colors.primary,
     borderWidth: 1,
-    padding: 3,
+    padding: 5,
+    paddingHorizontal:15,
     borderRadius: 30,
-    fontSize: 15,
+    fontSize: 17,
   },
 
   label:{

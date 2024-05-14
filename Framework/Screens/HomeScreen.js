@@ -1,19 +1,24 @@
-import { Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Dimensions, Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Theme } from '../Components/Theme'
 import { Button, Card } from 'react-native-paper'
 import { faAngleRight, faHeadphones, faHeadset, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Entypo, FontAwesome, FontAwesome5, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import Carousel from 'react-native-reanimated-carousel';
+const carouselLinks = [
+  "https://images.pexels.com/photos/5439381/pexels-photo-5439381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+  "https://images.pexels.com/photos/3778966/pexels-photo-3778966.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+]
 
-
-export function HomePage({navigation}) {
-
+export function HomePage({ navigation }) {
+  const screenWidth = Dimensions.get("screen").width
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <ScrollView>
-        <Button mode='text'style={{alignSelf:"flex-start"}} onPress={()=>{navigation.navigate("IntroScreen")}} >intro</Button>
+        <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
+          <Button mode='text' style={{ alignSelf: "flex-start" }} onPress={() => { navigation.navigate("IntroScreen") }} >intro</Button>
 
           <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
@@ -39,7 +44,7 @@ export function HomePage({navigation}) {
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 15, alignItems: "center" }}>
               <Text style={{ fontSize: 20, fontFamily: Theme.fonts.text600 }}>₦7,440,300.30</Text>
-              <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: Theme.colors.primary, padding: 10, paddingHorizontal: 15, borderRadius: 30 }}>
+              <TouchableOpacity  onPress={()=>{navigation.navigate("FundAccount")}} style={{ flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: Theme.colors.primary, padding: 10, paddingHorizontal: 15, borderRadius: 30 }}>
                 <FontAwesomeIcon icon={faPlus} color="white" size={15} />
                 <Text style={{ color: "white" }}>Add Money</Text>
               </TouchableOpacity>
@@ -47,18 +52,18 @@ export function HomePage({navigation}) {
           </View>
 
           <View style={styles.transfer}>
-            <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17 }}>Transfer</Text>
+            <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17 }}>Transfer Money</Text>
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 16, marginTop: 20 }}>
               <View style={{ alignItems: "center" }}>
                 <MaterialCommunityIcons name="bank-transfer" size={35} color={Theme.colors.primary} />
                 <Text style={{ fontSize: 12, fontFamily: Theme.fonts.text400, textAlign: "center", marginTop: 5 }}>To Bank</Text>
               </View>
               <View style={{ alignItems: "center" }}>
-              <FontAwesome6 name="contact-book" size={30} color={Theme.colors.primary} />
+                <FontAwesome6 name="contact-book" size={30} color={Theme.colors.primary} />
                 <Text style={{ fontSize: 12, fontFamily: Theme.fonts.text400, textAlign: "center", marginTop: 5 }}>To QP-Bills</Text>
               </View>
               <View style={{ alignItems: "center" }}>
-              <FontAwesome6 name="naira-sign" size={30} color={Theme.colors.primary} />
+                <FontAwesome6 name="naira-sign" size={30} color={Theme.colors.primary} />
                 <Text style={{ fontSize: 12, fontFamily: Theme.fonts.text400, textAlign: "center", marginTop: 5 }}>Withdraw</Text>
               </View>
             </View >
@@ -105,15 +110,23 @@ export function HomePage({navigation}) {
             </View>
           </View>
 
-          <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17, marginTop: 10 }}>Promos and discount</Text>
-          <Card style={{ marginTop: 10, backgroundColor: Theme.colors.primary + 10 }}>
-            <Card.Content>
-              <Text variant="bodyMedium" style={{ fontFamily: Theme.fonts.text500, fontSize: 20 }}>30% off</Text>
-              <Text variant="bodyMedium" style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Get discount for every TV and electricity purchase made on the QP-Bills app.</Text>
-            </Card.Content>
-          </Card>
+          <View style={{ marginVertical: 10, }}>
+            <Carousel
+              loop
+              width={screenWidth - 30}
+              height={200}
+              autoPlay={true}
+              data={carouselLinks}
+              style={{ borderRadius: 10 }}
+              scrollAnimationDuration={2000}
+              renderItem={({ index }) => (
+                <Image style={{ width: '100%', height: 200, borderRadius: 10, }} source={{ uri: carouselLinks[index] }} />
+              )}
+            />
+          </View>
 
-          <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17, marginTop: 10 }}>Transactions</Text>
+
+          {/* <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17, marginTop: 10 }}>Transactions</Text>
           <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10 }}>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
               <Image source={{ uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTsT9VojMYDl1a35sEilgC3W64KiQfj5cKBrEuobZD6w&s" }} style={styles.img} />
@@ -164,7 +177,7 @@ export function HomePage({navigation}) {
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
               <Text style={{ fontFamily: Theme.fonts.text400, }}>₦3500.00</Text>
             </View>
-          </View>
+          </View> */}
 
         </ScrollView>
       </View>

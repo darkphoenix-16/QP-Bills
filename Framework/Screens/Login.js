@@ -14,7 +14,9 @@ export function Login({navigation}) {
       <View style={styles.container}>
         <Button mode='text'style={{alignSelf:"flex-start"}} onPress={()=>{navigation.navigate("IntroScreen")}} >intro</Button>
           <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
-        <Text style={{fontSize:35, textAlign:"center", marginTop:160, fontFamily:Theme.fonts.text600}}>LogIn</Text>
+          <View style={{flex:1, justifyContent:"center",}}>
+
+        <Text style={{fontSize:35, textAlign:"center", fontFamily:Theme.fonts.text600}}>LogIn</Text>
         <View style={styles.label}>
         <Text style={{fontFamily:Theme.fonts.text500}}>UserName :</Text>
         <TextInput
@@ -39,6 +41,7 @@ export function Login({navigation}) {
         <Button mode='text' onPress={()=>{navigation.navigate("SignUp")}}>Sign Up</Button>
         </View>
        
+</View>
       </View>
     </SafeAreaView>
   )
@@ -54,7 +57,8 @@ const styles = StyleSheet.create({
   input: {
     borderColor: Theme.colors.primary,
     borderWidth: 1,
-    padding: 3,
+    padding: 5,
+    paddingHorizontal:15,
     borderRadius: 30,
     fontSize: 15,
     marginTop: 10

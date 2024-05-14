@@ -1,13 +1,23 @@
-import { Image, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Image, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
+import React, { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Theme } from '../Components/Theme'
 import { Button } from 'react-native-paper'
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
-import { EditProfile } from './EditProfile'
-import { faEdit } from '@fortawesome/free-regular-svg-icons'
+import { AntDesign, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
+import { AppButton } from '../Components/AppButton'
+
+
 
 export function Profile({ navigation }) {
+  const [show, setshow] = useState(false)
+  const toggleModal = () => setshow(!show)
+
+  function SignOut() {
+    toggleModal()
+    setTimeout(() => {
+      navigation.replace("IntroScreen")
+    }, 3000);
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -22,45 +32,71 @@ export function Profile({ navigation }) {
           </View>
 
           <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginTop: 10 }]}>
-            <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Full Name</Text>
             <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-              <Text style={{ fontFamily: Theme.fonts.text400, }}>John Wick</Text>
+              <AntDesign name="customerservice" size={17} color="black" />
+              <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Customer service</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <MaterialCommunityIcons name="greater-than" size={20} color="black" />
+            </View>
+          </View>
+          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginTop: 10 }]}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <AntDesign name="questioncircleo" size={17} color="black" />
+              <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>About Us</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <MaterialCommunityIcons name="greater-than" size={20} color="black" />
+            </View>
+          </View>
+          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginTop: 10 }]}>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <MaterialIcons name="star-rate" size={17} color="black" />
+              <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Rate Us</Text>
+            </View>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <MaterialCommunityIcons name="greater-than" size={20} color="black" />
             </View>
           </View>
 
-          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginTop: 10 }]}>
-            <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>E-mail</Text>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-              <Text style={{ fontFamily: Theme.fonts.text400, }}>JohnWick@gmail.com</Text>
-            </View>
-          </View>
-
-          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginTop: 10 }]}>
-            <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Username</Text>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-              <Text style={{ fontFamily: Theme.fonts.text400, }}>Johnwick_19</Text>
-            </View>
-          </View>
-
-          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginTop: 10 }]}>
-            <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Password</Text>
-            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-              <Text style={{ fontFamily: Theme.fonts.text400, }}>******</Text>
-            </View>
-          </View>
 
           <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17, marginTop: 10 }}>Settings</Text>
-          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginVertical: 10 }]}>
-            <Button mode='text' style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Payment settings</Button>
-           <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-           <MaterialCommunityIcons name="greater-than" size={20} color="black" />
-           </View>
+          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", }]}>
+            <Button mode='text' style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Change transfer pin</Button>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <MaterialCommunityIcons name="greater-than" size={20} color="black" />
+            </View>
+          </View>
+          <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginVertical: 5 }]}>
+            <Button mode='text' onPress={() => { navigation.navigate("ChangePassword") }} style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>Change password</Button>
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <MaterialCommunityIcons name="greater-than" size={20} color="black" />
+            </View>
           </View>
 
-          <Button mode='text'  onPress={() => { navigation.navigate("IntroScreen") }}>Sign Out</Button>
-
+          {/* <Button mode='text' onPress={() => { toggleModal }}>Sign Out</Button> */}
+          <AppButton
+            style={{ backgroundColor: "transparent", borderColor: Theme.colors.red, borderWidth: 1 , marginTop:20}}
+            textColor={Theme.colors.red} onPress={toggleModal}>Sign Out
+          </AppButton>
         </View>
       </View>
+      <Modal
+        visible={show}
+        animationType="slide"
+        transparent={true}
+      >
+        <View style={{ flex: 1, backgroundColor: "#000000a1" }}>
+          <Pressable onPress={toggleModal} style={{ flex: 1, }}></Pressable>
+          <View style={styles.modal}>
+            <Text style={{ fontFamily: Theme.fonts.text700, fontSize: 18, textAlign: "center", marginBottom: 30, color: Theme.colors.text2 }}>Are you sure you want to sign out?</Text>
+            <AppButton onPress={toggleModal}>No</AppButton>
+            <AppButton
+              style={{ backgroundColor: "transparent", borderColor: Theme.colors.red, borderWidth: 1, marginTop: 10 }}
+              textColor={Theme.colors.red} onPress={SignOut}>Sign Out</AppButton>
+          </View>
+        </View>
+      </Modal>
     </SafeAreaView>
   )
 }
@@ -81,5 +117,15 @@ const styles = StyleSheet.create({
     padding: 10,
     backgroundColor: Theme.colors.primary + 20,
     borderRadius: 10
+  },
+  modal: {
+    
+      backgroundColor: "white",
+      justifyContent: "center",
+      // alignItems: "center",
+      flex: 1,
+      borderRadius: 20,
+      // margin: 20,
+      padding: 20
   }
 })

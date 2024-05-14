@@ -8,6 +8,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen } from './BottomTab';
 import { ForgottenPassword } from '../Screens/ForgottenPassword';
 import { EditProfile } from '../Screens/EditProfile';
+import { ChangePassword } from '../Screens/ChangePassword';
+import { FundAccount } from '../Screens/FundAccount';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +25,8 @@ export function StackNavigator() {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="ForgotPassword" component={ForgottenPassword} />
       <Stack.Screen name="Editprofile" component={EditProfile} />
+      <Stack.Screen name="FundAccount" component={FundAccount} />
+      <Stack.Screen name="ChangePassword" component={ChangePassword} />
       
     </Stack.Navigator>
     </NavigationContainer>
