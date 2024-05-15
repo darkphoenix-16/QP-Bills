@@ -12,7 +12,6 @@ export function SignUp({navigation}) {
       <Button mode='text'style={{alignSelf:"flex-start"}} onPress={()=>{navigation.navigate("IntroScreen")}} >intro</Button>
           <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
           <View style={{flex:1, justifyContent:"center",}}>
-
         <Text style={{ fontSize: 35, textAlign: "center", fontFamily:Theme.fonts.text600 }}>Create Account</Text>
         <View style={styles.label}>
         <Text style={{fontFamily:Theme.fonts.text500}}>Full Name :</Text>

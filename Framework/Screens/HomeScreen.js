@@ -37,7 +37,7 @@ export function HomePage({ navigation }) {
           <View style={styles.balance}>
             <View style={{ flexDirection: "row", justifyContent: "space-between", }}>
               <Text>Total Balance</Text>
-              <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", }}>
+              <TouchableOpacity onPress={()=>{navigation.navigate("Transaction")}} style={{ flexDirection: "row", alignItems: "center", }}>
                 <Text>Transaction History </Text>
                 <FontAwesomeIcon icon={faAngleRight} color={Theme.colors.primary} size={15} />
               </TouchableOpacity>

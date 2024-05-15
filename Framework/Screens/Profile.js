@@ -21,7 +21,7 @@ export function Profile({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
+        <Text  onPress={()=>{navigation.navigate("HomeScreen")}} style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
         <Text style={{ fontSize: 20, textAlign: "center", marginTop: 5, fontFamily: Theme.fonts.text600 }}>Profile</Text>
         <View style={{ marginBottom: 10 }}>
           <Image source={{ uri: "https://avatar.iran.liara.run/public/7" }} style={[styles.img, { alignSelf: "center" }]} />
