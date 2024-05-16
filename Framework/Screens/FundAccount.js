@@ -5,7 +5,8 @@ import { Theme } from '../Components/Theme'
 import { AntDesign, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import { Button } from 'react-native-paper'
 
-export function FundAccount({navigation}) {
+export function FundAccount({navigation, route}) {
+  // console.log(route);
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>

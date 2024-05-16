@@ -1,11 +1,12 @@
 import { Dimensions, Image, SafeAreaView, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { Theme } from '../Components/Theme'
 import { Button, Card } from 'react-native-paper'
 import { faAngleRight, faHeadphones, faHeadset, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Entypo, FontAwesome, FontAwesome5, FontAwesome6, Ionicons, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import Carousel from 'react-native-reanimated-carousel';
+import { AppContext } from '../Components/GlobalVariables';
 const carouselLinks = [
   "https://images.pexels.com/photos/5439381/pexels-photo-5439381.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   "https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
@@ -14,6 +15,9 @@ const carouselLinks = [
 
 export function HomePage({ navigation }) {
   const screenWidth = Dimensions.get("screen").width
+  const {userUID} = useContext(AppContext)
+  // console.log(userUID);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -44,7 +48,7 @@ export function HomePage({ navigation }) {
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 15, alignItems: "center" }}>
               <Text style={{ fontSize: 20, fontFamily: Theme.fonts.text600 }}>₦7,440,300.30</Text>
-              <TouchableOpacity  onPress={()=>{navigation.navigate("FundAccount")}} style={{ flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: Theme.colors.primary, padding: 10, paddingHorizontal: 15, borderRadius: 30 }}>
+              <TouchableOpacity  onPress={()=>{navigation.navigate("FundAccount",{docID : "sdnkvjbkdsnm"})}} style={{ flexDirection: "row", alignItems: "center", gap: 5, backgroundColor: Theme.colors.primary, padding: 10, paddingHorizontal: 15, borderRadius: 30 }}>
                 <FontAwesomeIcon icon={faPlus} color="white" size={15} />
                 <Text style={{ color: "white" }}>Add Money</Text>
               </TouchableOpacity>

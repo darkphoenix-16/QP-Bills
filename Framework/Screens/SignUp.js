@@ -2,6 +2,7 @@ import { SafeAreaView, StatusBar, StyleSheet, Text, TextInput, View } from 'reac
 import React from 'react'
 import { Button, Switch } from 'react-native-paper';
 import { Theme } from '../Components/Theme';
+import { Formik } from 'formik';
 
 export function SignUp({navigation}) {
  
@@ -11,6 +12,14 @@ export function SignUp({navigation}) {
         
       <Button mode='text'style={{alignSelf:"flex-start"}} onPress={()=>{navigation.navigate("IntroScreen")}} >intro</Button>
           <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
+          <Formik
+        initialValues={{fullname :"john wick", email:"john@gmail.com", username:"john99", password:"password"}}
+        onSubmit={(value)=>{
+          console.log( value.fullname, value.email,value.username, value.password)
+        }}
+        >
+          {(prop)=>{
+            return (
           <View style={{flex:1, justifyContent:"center",}}>
         <Text style={{ fontSize: 35, textAlign: "center", fontFamily:Theme.fonts.text600 }}>Create Account</Text>
         <View style={styles.label}>
@@ -48,12 +57,15 @@ export function SignUp({navigation}) {
           style={styles.input}
           />
           </View>
-        <Button mode='contained-tonal' style={{ marginVertical: 10 }} onPress={()=>{navigation.navigate("HomeScreen")}} buttonColor={Theme.colors.primary +30}  > Sign Up</Button>
+        <Button mode='contained-tonal' style={{ marginVertical: 10 }} onPress={prop.handleSubmit} buttonColor={Theme.colors.primary +30}  > Sign Up</Button>
         <View style={{flexDirection:"row", alignItems:"center", justifyContent:"center"}}> 
         <Text style={{ fontSize: 15, marginVertical:30, fontFamily:Theme.fonts.text300}}>Im already a user</Text>
         <Button mode='text' onPress={()=>{navigation.navigate("Login")}}>Log In</Button>
         </View>
 </View>
+      )
+          }}
+        </Formik>
       </View>
     </SafeAreaView>
   )
