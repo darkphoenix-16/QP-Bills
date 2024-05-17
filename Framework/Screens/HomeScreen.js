@@ -16,7 +16,7 @@ const carouselLinks = [
 export function HomePage({ navigation }) {
   const screenWidth = Dimensions.get("screen").width
   const {userUID} = useContext(AppContext)
-  // console.log(userUID);
+  console.log(userUID); 
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
