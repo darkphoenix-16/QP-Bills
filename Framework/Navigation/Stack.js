@@ -11,6 +11,9 @@ import { EditProfile } from '../Screens/EditProfile';
 import { ChangePassword } from '../Screens/ChangePassword';
 import { FundAccount } from '../Screens/FundAccount';
 import { Transaction } from '../Screens/Transaction';
+import { Transfer } from '../Screens/Transfer';
+import { Airtime } from '../Screens/Airtime';
+import { Data } from '../Screens/Data';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +21,7 @@ export function StackNavigator() {
   return (
     <NavigationContainer>
 
-    <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown:false}} >
+    <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown:true}} >
       <Stack.Screen name="IntroScreen" component={IntroScreen} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
@@ -29,6 +32,9 @@ export function StackNavigator() {
       <Stack.Screen name="FundAccount" component={FundAccount} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="Transaction" component={Transaction} />
+      <Stack.Screen name="Transfer" component={Transfer} />
+      <Stack.Screen name="Airtime" component={Airtime} />
+      <Stack.Screen name="Data" component={Data} />
       
     </Stack.Navigator>
     </NavigationContainer>

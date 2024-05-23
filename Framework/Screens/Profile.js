@@ -1,14 +1,16 @@
 import { Image, Modal, Pressable, StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Theme } from '../Components/Theme'
-import { Button } from 'react-native-paper'
+import { Button, Card } from 'react-native-paper'
 import { AntDesign, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import { AppButton } from '../Components/AppButton'
+import { AppContext } from '../Components/GlobalVariables'
 
 
 
 export function Profile({ navigation }) {
+  const { userUID, setPreloader, setUserInfo, userInfo } = useContext(AppContext)
   const [show, setshow] = useState(false)
   const toggleModal = () => setshow(!show)
 
@@ -21,14 +23,17 @@ export function Profile({ navigation }) {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Text  onPress={()=>{navigation.navigate("HomeScreen")}} style={{ fontFamily: Theme.fonts.text400, fontSize: 15 }}>QP-Bills</Text>
         <Text style={{ fontSize: 20, textAlign: "center", marginTop: 5, fontFamily: Theme.fonts.text600 }}>Profile</Text>
         <View style={{ marginBottom: 10 }}>
           <Image source={{ uri: "https://avatar.iran.liara.run/public/7" }} style={[styles.img, { alignSelf: "center" }]} />
-          <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17, alignSelf: "center" }}>John wick</Text>
-          <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 17, alignSelf: "center" }}>+20071590374</Text>
+          <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17, alignSelf: "center" }}>{userInfo.firstname} {userInfo.lastname}</Text>
+          <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 17, alignSelf: "center" }}>{userInfo.accountNumber}</Text>
           <View style={{ flexDirection: "row", justifyContent: "center", alignItems: "center", marginTop: 10 }}>
             <Button mode='contained' icon={"account-edit"} textColor='black' buttonColor={Theme.colors.primary + 30} onPress={() => { navigation.navigate("Editprofile") }}>Edit Profile</Button>
+          </View>
+          <View style={{backgroundColor:Theme.colors.primary + 20, marginTop:10, padding:10}}>
+            <Text style={{fontFamily: Theme.fonts.text400, marginVertical:10, fontSize: 17, marginLeft:10 , borderBottomWidth:0.3, borderColor:"gray" }}> Account Name:   {userInfo.firstname} {userInfo.lastname}</Text>
+            <Text style={{fontFamily: Theme.fonts.text400, fontSize: 17, marginLeft:10 }}> Account Number:   {userInfo.accountNumber}</Text>
           </View>
 
           <View style={[styles.view, { flexDirection: "row", justifyContent: "space-between", marginTop: 10 }]}>

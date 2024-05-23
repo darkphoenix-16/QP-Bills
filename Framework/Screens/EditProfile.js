@@ -8,7 +8,6 @@ import * as yup from "yup"
 
 const validation = yup.object({
   email: yup.string().email().required(),
-  password: yup.string().min(8).max(20).required(),
   phonenumber: yup.string().min(11).max(11).required(),
   address: yup.string().min(5).max(20).required(),
 })
@@ -18,9 +17,8 @@ export  function EditProfile({navigation}) {
   return (
     <SafeAreaView style={{flex:1}}>
     <View style={styles.container}>
-    <Button mode='text'style={{alignSelf:"flex-start"}} onPress={()=>{navigation.navigate("Profile")}} >profile</Button>
     <Formik
-    initialValues={{ email: "", password: "", phonenumber: "", address:"" }}
+    initialValues={{ email: "",  phonenumber: "", address:"" }}
           onSubmit={(value) => {
             navigation.navigate("HomeScreen")}}
 
@@ -33,9 +31,8 @@ export  function EditProfile({navigation}) {
         <View style={styles.label}>
         <Text style={{fontFamily:Theme.fonts.text500}}>New email :</Text>
         <TextInput
-          // placeholder='Enter  Full Name'
-          placeholderTextColor={"gray"}
-          style={styles.input}
+          placeholder='enter new email'  
+          style={{borderBottomWidth: 1, padding: 10,}}
           value={prop.values.email}
           onChangeText={prop.handleChange("email")}
           onBlur={prop.handleBlur("email")}
@@ -44,23 +41,10 @@ export  function EditProfile({navigation}) {
           </View>
 
           <View>
-        <Text style={{fontFamily:Theme.fonts.text500}}> New Password :</Text>
-        <TextInput
-          placeholderTextColor={"gray"}
-          style={styles.input}
-          value={prop.values.password}
-          onChangeText={prop.handleChange("password")}
-          onBlur={prop.handleBlur("password")}
-          />
-           <Text style={{ fontSize: 13, color: Theme.colors.red, fontFamily: Theme.fonts.text400 }}>{prop.touched.password && prop.errors.password}</Text>
-          
-          </View>
-
-          <View>
         <Text style={{fontFamily:Theme.fonts.text500}}> Phone number :</Text>
         <TextInput
-          placeholderTextColor={"gray"}
-          style={styles.input}
+          placeholder='enter phone number'
+          style={{borderBottomWidth: 1, padding: 10,}}
           value={prop.values.phonenumber}
           onChangeText={prop.handleChange("phonenumber")}
           onBlur={prop.handleBlur("phonenumber")}
@@ -72,8 +56,8 @@ export  function EditProfile({navigation}) {
           <View>
         <Text style={{fontFamily:Theme.fonts.text500}}> Address :</Text>
         <TextInput
-          placeholderTextColor={"gray"}
-          style={styles.input}
+          placeholder='enter your address'
+          style={{borderBottomWidth: 1, padding: 10,}}
           value={prop.values.address}
           onChangeText={prop.handleChange("address")}
           onBlur={prop.handleBlur("address")}
@@ -99,14 +83,5 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#ffffff00",
   },
-  input: {
-    borderColor: Theme.colors.primary,
-    borderWidth: 1,
-    padding: 5,
-    paddingHorizontal:15,
-    borderRadius: 30,
-    fontSize: 15,
-    marginTop: 10
-
-  },
+ 
 })

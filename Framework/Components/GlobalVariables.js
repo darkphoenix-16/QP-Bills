@@ -1,16 +1,20 @@
-import { createContext, useState } from "react"
+import { createContext, useState } from 'react'
+
 export const AppContext = createContext()
 
 export function AppProvider({ children }) {
-    const [userUID, setUserUID] = useState("sdnkvjbkdsnm")
-    const [userInfo, setUserInfo] = useState({})
+    const [userUID, setUserUID] = useState("bfhHqMoApAgrbVZNi5Wd6UqgRbU2");
+    const [userInfo, setUserInfo] = useState({});
+    const [preloader, setPreloader] = useState(false);
+
 
     return (
-
         <AppContext.Provider
             value={{
                 userUID, setUserUID,
-                userInfo, setUserInfo
+                userInfo, setUserInfo,
+                preloader, setPreloader,
+
             }}
         >
             {children}
