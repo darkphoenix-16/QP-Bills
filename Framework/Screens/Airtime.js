@@ -101,8 +101,8 @@ export function Airtime() {
 
             <View style={{ marginVertical: 10, backgroundColor:Theme.colors.bg2,padding:10,borderRadius:10 }}>
                 <TextInput style={{paddingHorizontal: 10}}
-                 placeholder ={"50 - 500000"}
-                 placeholderTextColor={Theme.colors.gray}>₦  </TextInput>
+                 placeholder =" ₦50 - 500000"
+                 placeholderTextColor={Theme.colors.gray}  />
             </View>
 
             <Button mode='contained-tonal' buttonColor={Theme.colors.primary + 40}>Pay</Button>

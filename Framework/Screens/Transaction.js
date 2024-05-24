@@ -1,4 +1,4 @@
-import { FlatList, Image, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, FlatList, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useContext, useEffect, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Button } from 'react-native-paper'
@@ -6,13 +6,25 @@ import { Theme } from '../Components/Theme'
 import { FontAwesome6, Ionicons } from '@expo/vector-icons'
 import { formatMoney } from '../Components/FormatMoney'
 import { AppContext } from '../Components/GlobalVariables'
-import { collection, onSnapshot, query, where } from 'firebase/firestore'
+import { collection, deleteDoc, limit, onSnapshot, orderBy, query, where } from 'firebase/firestore'
 import { db } from '../Firebase/settings'
+import { text } from '@fortawesome/fontawesome-svg-core'
 
 
 export function Transaction() {
     const { userUID, setPreloader, setUserInfo, userInfo } = useContext(AppContext)
     const [history, setHistory] = useState([]);
+
+    function deleteHistory(docID) {
+        setPreloader(true)
+        deleteDoc(doc(db,"history", docID)).then(()=>{
+            Alert.alert("History deleted")
+            setPreloader(false)
+        }).catch((e)=>{
+         console.log(e);
+         setPreloader(false)
+        })
+    }
 
     useEffect(() => {
         setPreloader(true)
@@ -25,11 +37,11 @@ export function Transaction() {
         // })
 
         const q = collection(db, 'history');
-        const filter = query(q, where('userUID', '==', userUID));
+        const filter = query(q, where('userUID', '==', userUID), orderBy("date","Desc"));
         onSnapshot(filter, (snapShot) => {
             let data = [];
             snapShot.forEach((doc) => {
-                data.push(doc.data())
+                data.push({...doc.data(), docID: doc.id})
             })
             setHistory(data);
             setPreloader(false)
@@ -49,6 +61,7 @@ export function Transaction() {
                     data={history}
                     renderItem={({ item }) => {
                         return (
+                            <TouchableOpacity onLongPress={()=> Alert.alert("Delete!, Are you sure you want to delete this history",[{text:"ok", onPress: ()=>{}}])}>
                             <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10, borderBottomWidth: 1.2, borderBottomColor: Theme.colors.bg2, paddingBottom: 10 }}>
                                 <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
                                     <Image source={{ uri: "https://images.ctfassets.net/y2ske730sjqp/5QQ9SVIdc1tmkqrtFnG9U1/de758bba0f65dcc1c6bc1f31f161003d/BrandAssets_Logos_02-NSymbol.jpg?w=940" }} style={styles.img} />
@@ -62,6 +75,7 @@ export function Transaction() {
                                     <Text style={{ color: Theme.colors[item.status == "successful" ? "green" : "red"], fontFamily: Theme.fonts.text500, fontSize: 14, textTransform: "capitalize" }}>{item.status}</Text>
                                 </View>
                             </View>
+                            </TouchableOpacity>
                         )
                     }}
                     keyExtractor={({ item }) => { item }}

@@ -14,6 +14,7 @@ import { Transaction } from '../Screens/Transaction';
 import { Transfer } from '../Screens/Transfer';
 import { Airtime } from '../Screens/Airtime';
 import { Data } from '../Screens/Data';
+import { ChangePin } from '../Screens/ChangePin';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,6 +32,7 @@ export function StackNavigator() {
       <Stack.Screen name="Editprofile" component={EditProfile} />
       <Stack.Screen name="FundAccount" component={FundAccount} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
+      <Stack.Screen name="ChangePin" component={ChangePin} />
       <Stack.Screen name="Transaction" component={Transaction} />
       <Stack.Screen name="Transfer" component={Transfer} />
       <Stack.Screen name="Airtime" component={Airtime} />

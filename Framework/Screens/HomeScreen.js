@@ -124,7 +124,7 @@ export function HomePage({ navigation }) {
                         <View style={{ flexDirection: "row", justifyContent: "space-between", gap: 16, marginTop: 20 }}>
                             <View style={{ alignItems: "center" }}>
                                 <TouchableOpacity onPress={()=> navigation.navigate("Airtime")}>
-                                <FontAwesome name="phone-square" size={30} color={Theme.colors.primary}  onPress={navigation.navigate("Airtime")}/>
+                                <FontAwesome name="phone-square" size={30} color={Theme.colors.primary}/>
                                 <Text style={{ fontSize: 12, fontFamily: Theme.fonts.text400, textAlign: "center", marginTop: 5 }}>Airtime</Text>
                                 </TouchableOpacity>
                             </View>
