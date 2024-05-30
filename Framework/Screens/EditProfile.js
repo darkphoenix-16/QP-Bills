@@ -1,5 +1,5 @@
-import { Alert, StyleSheet, Text, TextInput, View } from 'react-native'
-import React, { useContext } from 'react'
+import { Alert, Image, StyleSheet, Text, TextInput, View } from 'react-native'
+import React, { useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Button } from 'react-native-paper'
 import { Theme } from '../Components/Theme'
@@ -8,7 +8,8 @@ import * as yup from "yup"
 import { AppContext } from '../Components/GlobalVariables'
 import { AppButton } from '../Components/AppButton'
 import { doc, updateDoc } from 'firebase/firestore'
-import { db } from '../Firebase/settings'
+import { db, imgStorage } from '../Firebase/settings'
+import * as ImagePicker from 'expo-image-picker';
 
 const validation = yup.object({
   gender: yup.string().min(4).max(6).required(),
@@ -18,6 +19,49 @@ const validation = yup.object({
 
 export function EditProfile({ navigation }) {
   const { userUID, setPreloader, setUserInfo, userInfo } = useContext(AppContext)
+
+  const [image, setImage] = useState(null);
+
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      uplaodToStorage(result.assets[0].uri)
+        .then(() => {
+          setPreloader(false)
+          Alert.alert(
+            "Upload Status",
+            "Profile image has been uploaded successfully",
+          )
+        })
+    }
+  };
+
+  async function uplaodToStorage(image) {
+    setPreloader(true)
+    try {
+      let response = await fetch(image);
+      const imageBlob = await response.blob()
+      await imgStorage().ref().child(`ProfileImages/${userUID}`).put(imageBlob);
+    } catch {
+      setPreloader(false)
+      Alert.alert(
+        "Upload Status",
+        "Failed to upload profile image. Please try again",
+        [{ text: 'OK' }]
+      )
+    }
+  }
+
   return (
     // <SafeAreaView style={{flex:1}}>
     <View style={styles.container}>
@@ -43,9 +87,18 @@ export function EditProfile({ navigation }) {
         {(prop) => {
           return (
             <View style={{ flex: 1, }}>
-              <Text style={{ fontSize: 35, textAlign: "center", fontFamily: Theme.fonts.text600, marginBottom: 30 }}>Edit Profile</Text>
+              {/* <Text style={{ fontSize: 35, textAlign: "center", fontFamily: Theme.fonts.text600, marginBottom: 30 }}>Edit Profile</Text> */}
+
+              <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, gap: 10 }}>
+                        <Image source={{ uri: "https://avatar.iran.liara.run/public/7" }} style={[styles.img, { alignSelf: "center" }]} />
+                        <View style={{}}>
+                            <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18, alignSelf: "center", marginBottom: 5 }}>{userInfo.firstname} {userInfo.lastname}</Text>
+                            <Button mode='contained' icon={"account-edit"} textColor='black' buttonColor={Theme.colors.primary + 30} onPress={pickImage}>Change Image</Button>
+                        </View>
+                    </View>
+
               <View style={styles.label}>
-                <Text style={{ fontFamily: Theme.fonts.text500 }}>Email :</Text>
+                <Text style={{ fontFamily: Theme.fonts.text500, marginTop:10 }}>Email :</Text>
                 <TextInput
                   style={{ borderBottomWidth: 1, padding: 10,marginBottom:10 }}
                   value={userInfo.email}
@@ -111,5 +164,10 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: "#ffffff",
   },
+  img: {
+    width: 100,
+    height: 100,
+    borderRadius: 100
+},
 
 })

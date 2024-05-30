@@ -10,13 +10,6 @@ export function Transfer() {
 
       <View style={{ padding: 15, backgroundColor: Theme.colors.bg2, marginVertical: 20, borderRadius: 10 }}>
 
-        <View style={{  borderRadius: 10, padding: 10, marginBottom: 10,  }}>
-          <Pressable style={{ borderBottomWidth: 1,flexDirection: "row", justifyContent:"space-between" }}>
-            <Text style={{fontSize:12, fontFamily:Theme.fonts.text300}}>Select Bank</Text>
-            <MaterialCommunityIcons name="greater-than" size={20} color="black" />
-          </Pressable>
-        </View>
-
         <View style={{ borderRadius: 10, padding: 10, marginBottom: 10 }}>
           <Text>Recipient Account</Text>
           <TextInput

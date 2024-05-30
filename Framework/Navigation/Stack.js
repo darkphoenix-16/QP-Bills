@@ -15,6 +15,7 @@ import { Transfer } from '../Screens/Transfer';
 import { Airtime } from '../Screens/Airtime';
 import { Data } from '../Screens/Data';
 import { ChangePin } from '../Screens/ChangePin';
+import { Pay } from '../Screens/Pay';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,10 +24,10 @@ export function StackNavigator() {
     <NavigationContainer>
 
     <Stack.Navigator initialRouteName='HomeScreen' screenOptions={{headerShown:true}} >
+      <Stack.Screen name="HomeScreen" component={HomeScreen} options={{headerShown:false}}/>
       <Stack.Screen name="IntroScreen" component={IntroScreen} />
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="ForgotPassword" component={ForgottenPassword} />
       <Stack.Screen name="Editprofile" component={EditProfile} />
@@ -37,6 +38,7 @@ export function StackNavigator() {
       <Stack.Screen name="Transfer" component={Transfer} />
       <Stack.Screen name="Airtime" component={Airtime} />
       <Stack.Screen name="Data" component={Data} />
+      <Stack.Screen name="Pay" component={Pay} />
       
     </Stack.Navigator>
     </NavigationContainer>

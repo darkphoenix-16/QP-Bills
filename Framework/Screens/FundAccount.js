@@ -59,23 +59,17 @@ export function FundAccount({ navigation, route }) {
         visible={show}
         animationType="slide"
         transparent={true}
-        amount={amount}
+        
       >
         <View style={{ flex: 1, backgroundColor: "#000000a1" }}>
           <Pressable onPress={toggleModal} style={{ flex: 1, }}></Pressable>
           <View style={styles.modal}>
             <Text style={{ textAlign: "center", fontFamily: Theme.fonts.text500, fontSize: 15, }}>Confirm details</Text>
-            <View style={{ backgroundColor: Theme.colors.primary + 30, borderRadius: 20, marginVertical: 10 }}>
+            <View style={{ backgroundColor: Theme.colors.primary + 30, borderRadius: 10, marginVertical: 10 }}>
               <Text style={{ padding: 5,fontFamily:Theme.fonts.text400 }}>Confirm the transfer details  before you proceed to avoid mistakes</Text>
             </View>
             <MaterialCommunityIcons name="bank-transfer" size={36} color="black" style={{ alignSelf: "center", marginVertical: 5 }} />
-            <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 5 }}>
-              <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>Acccount Number</Text>
-              <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>{userInfo.accountNumber}</Text>
-            </View>
-
-
-
+            
             <View style={{ flexDirection: "row", justifyContent: "space-between", marginVertical: 5 }}>
               <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>Payment Method</Text>
               <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>Paystack/Card</Text>
@@ -91,13 +85,13 @@ export function FundAccount({ navigation, route }) {
               <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>1.8%</Text>
             </View>
 
-            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 , marginBottom:15 }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 5 , marginBottom:25 }}>
               <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>Total</Text>
-              <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>₦{Number(amount) + ((1.8/100 )*Number(amount))}</Text>
+              <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 14 }}>₦{Number(amount) + ((1.8/100 )* Number(amount))}</Text>
             </View>
 
-            <AppButton onPress={toggleModal}>Confirm</AppButton>
-            {/* onPress={()=>Alert.alert("Payment made",[{ text:"ok", onPress:()=>{}}])} */}
+            <AppButton onPress={() => { toggleModal(); navigation.navigate("Pay", { amount: Number(amount) }) }}>Confirm</AppButton>
+            {/* onPress={()=>Alert.alert("Title","message",[{ text:"ok", onPress:()=>{}}])} */}
           </View>
         </View>
       </Modal>

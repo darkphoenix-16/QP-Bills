@@ -1,13 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import * as Font from 'expo-font';
 import {
-Montserrat_100Thin, Montserrat_200ExtraLight, Montserrat_300Light, Montserrat_400Regular,
-Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_800ExtraBold, Montserrat_900Black
+  Montserrat_100Thin, Montserrat_200ExtraLight, Montserrat_300Light, Montserrat_400Regular,
+  Montserrat_500Medium, Montserrat_600SemiBold, Montserrat_700Bold, Montserrat_800ExtraBold, Montserrat_900Black
 } from "@expo-google-fonts/montserrat"
 import { Theme } from './Framework/Components/Theme';
 import { useCallback, useEffect, useState } from 'react';
 import { StackNavigator } from './Framework/Navigation/Stack';
 import { AppProvider } from './Framework/Components/GlobalVariables';
+import { Preloader } from './Framework/Components/Preloader';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -47,7 +48,8 @@ export default function App() {
 
   return (
     <AppProvider>
-   <StackNavigator/>
+      <Preloader />
+      <StackNavigator />
     </AppProvider>
   );
 }

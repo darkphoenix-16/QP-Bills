@@ -28,7 +28,7 @@ export function Profile({ navigation }) {
                         <Image source={{ uri: "https://avatar.iran.liara.run/public/7" }} style={[styles.img, { alignSelf: "center" }]} />
                         <View style={{}}>
                             <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18, alignSelf: "center", marginBottom: 5 }}>{userInfo.firstname} {userInfo.lastname}</Text>
-                            <Button mode='contained' icon={"account-edit"} textColor='black' buttonColor={Theme.colors.primary + 30} onPress={() => { navigation.navigate("EditProfile") }}>Edit Profile</Button>
+                            <Button mode='contained' icon={"account-edit"} textColor='black' buttonColor={Theme.colors.primary + 30} onPress={() => { navigation.navigate("Editprofile") }}>Edit Profile</Button>
                         </View>
                     </View>
 

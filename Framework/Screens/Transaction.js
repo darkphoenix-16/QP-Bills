@@ -37,7 +37,7 @@ export function Transaction() {
         // })
 
         const q = collection(db, 'history');
-        const filter = query(q, where('userUID', '==', userUID), orderBy("date","Desc"));
+        const filter = query(q, where('userUID', '==', userUID)) // orderBy("date","Desc"));
         onSnapshot(filter, (snapShot) => {
             let data = [];
             snapShot.forEach((doc) => {
@@ -58,8 +58,8 @@ export function Transaction() {
 
 
                 <FlatList
-                    data={history}
-                    renderItem={({ item }) => {
+                    data={history.sort((a, b) => b.date - a.date)}
+                    renderItem={({ item}) => {
                         return (
                             <TouchableOpacity onLongPress={()=> Alert.alert("Delete!, Are you sure you want to delete this history",[{text:"ok", onPress: ()=>{}}])}>
                             <View style={{ flexDirection: "row", justifyContent: "space-between", marginTop: 10, borderBottomWidth: 1.2, borderBottomColor: Theme.colors.bg2, paddingBottom: 10 }}>
