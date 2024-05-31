@@ -1,29 +1,29 @@
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, ActivityIndicator } from 'react-native'
+import React, { useContext } from 'react'
 import { Theme } from './Theme'
-
+import { AppContext } from './GlobalVariables';
 
 export function Preloader() {
+  const { preloader } = useContext(AppContext);
   return (
-    <View style={styles.loader}>
-      <ActivityIndicator color={Theme.colors.primary} size={"large"}/>
-      {/* <Text>Loading....</Text> */}
-    </View>
+    preloader ?
+      <View style={styles.loader}>
+        <ActivityIndicator color={Theme.colors.primary} size={"large"} />
+      </View>
+      : null
   )
 }
 
 const styles = StyleSheet.create({
-  loader:{
+  loader: {
     flex: 1,
-    height:"100%",
+    height: "100%",
+    width: "100%",
     justifyContent: 'center',
     alignItems: 'center',
-    position:"absolute",
-    top:0,
-    zIndex:10,
-    backgroundColor:"#ffffffbf ",
-    width:"100%"
+    position: "absolute",
+    top: 0,
+    backgroundColor: "#ffffffbf",
+    zIndex: 10,
   }
-  
-
 })

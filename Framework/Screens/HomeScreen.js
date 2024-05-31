@@ -71,7 +71,7 @@ export function HomePage({ navigation }) {
 
                     <View style={styles.topBar}>
                         <View style={{ flexDirection: "row", gap: 10, alignItems: 'center', }}>
-                            <Image source={{ uri: "https://img.freepik.com/free-photo/portrait-man-laughing_23-2148859448.jpg?t=st=1715176660~exp=1715180260~hmac=bd7d9a840a881ad650f607ab814071d6bc4ef4994aa53f30d148fef851250390&w=1380" }} style={styles.img} />
+                            <Image source={{ uri: userInfo.image }} style={styles.img} />
                             <View>
                                 <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18 }}>{userInfo.firstname} {userInfo.lastname}</Text>
                                 <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 12, color: Theme.colors.text2 }}>Welcome to QP Bills</Text>
@@ -106,14 +106,14 @@ export function HomePage({ navigation }) {
                         <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17 }}>Transfer Money</Text>
 
                         <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 16, marginTop: 20 }}>
-                            <View style={{ alignItems: "center" }}>
-                                <MaterialCommunityIcons name="bank-transfer" size={35} color={Theme.colors.primary} onPress={() => navigation.navigate("Transfer")} />
+                            <TouchableOpacity style={{ alignItems: "center" }} onPress={() => navigation.navigate("Transfer")} >
+                                <MaterialCommunityIcons name="bank-transfer" size={35} color={Theme.colors.primary} />
                                 <Text style={{ fontSize: 12, fontFamily: Theme.fonts.text400, textAlign: "center", marginTop: 5 }}>To Bank</Text>
-                            </View>
-                            <View style={{ alignItems: "center" }}>
+                            </TouchableOpacity>
+                            <TouchableOpacity style={{ alignItems: "center" }} onPress={()=>navigation.navigate("Transfer")}>
                                 <FontAwesome6 name="contact-book" size={30} color={Theme.colors.primary} />
                                 <Text style={{ fontSize: 12, fontFamily: Theme.fonts.text400, textAlign: "center", marginTop: 5 }}>To QP-Bills</Text>
-                            </View>
+                            </TouchableOpacity>
                             <View style={{ alignItems: "center" }}>
                                 <FontAwesome6 name="naira-sign" size={30} color={Theme.colors.primary} />
                                 <Text style={{ fontSize: 12, fontFamily: Theme.fonts.text400, textAlign: "center", marginTop: 5 }}>Withdraw</Text>
@@ -201,6 +201,8 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         borderRadius: 100,
+        borderWidth:1,
+        borderColor:Theme.colors.border
     },
     balance: {
         marginTop: 20,

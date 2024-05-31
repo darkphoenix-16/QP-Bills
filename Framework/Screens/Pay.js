@@ -14,7 +14,8 @@ export function Pay({ navigation, route }) {
     <View style={{ flex: 1 }}>
       <Paystack
         paystackKey={"pk_test_92fcc0077ec7f42a73ff01c87db79c3698b06dec"}
-        amount={amount + ((1.8 / 100) * amount)}
+        amount={amount}
+        // amount={amount + ((1.8 / 100) * amount)}
         billingEmail={userInfo.email}
         activityIndicatorColor={Theme.colors.green}
         onCancel={() => navigation.goBack()}
@@ -22,17 +23,17 @@ export function Pay({ navigation, route }) {
         onSuccess={() => {
           setPreloader(true);
           updateDoc(doc(db, "users", userUID), {
-            balance: amount + Number(userInfo.balance)
+            balance: Number(userInfo.balance) - amount
           })
          .then(() => {
-            addDoc(collection(db, "history"), {
+            addDoc(collection(db, "history" ), {
               refId: "qp_" + generateNumber(20),
               naration: "",
               amount:  amount ,
-              description: "Card deposit",
-              category: "Fund",
+              description: "Transfer to ben",
+              category: "Transfer",
               userUID,
-              type: "credit",
+              type: "debit",
               date: Date.now(),
               status: "successful",
             })

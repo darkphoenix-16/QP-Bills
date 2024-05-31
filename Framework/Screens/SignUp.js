@@ -42,6 +42,7 @@ export function SignUp({ navigation }) {
                 balance: 0,
                 username: value.username,
                 userUID: uid,
+                image:"https://avatar.iran.liara.run/public/7",
                 phone: "",
                 role: "user",
               }).then((data) => {

@@ -48,8 +48,8 @@ export default function App() {
 
   return (
     <AppProvider>
-      <Preloader />
       <StackNavigator />
+      <Preloader />
     </AppProvider>
   );
 }

@@ -3,9 +3,11 @@ import React, { useContext, useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Theme } from '../Components/Theme'
 import { Button, Card } from 'react-native-paper'
-import { AntDesign, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
+import { AntDesign, FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons'
 import { AppContext } from '../Components/GlobalVariables'
 import { AppButton } from '../Components/AppButton'
+import * as Clipboard from 'expo-clipboard';
+
 
 
 
@@ -20,12 +22,18 @@ export function Profile({ navigation }) {
             navigation.replace("IntroScreen")
         }, 3000);
     }
+    const [copiedText, setCopiedText] = React.useState('');
+
+    const copyToClipboard = async () => {
+      await Clipboard.setStringAsync(userInfo.accountNumber);
+    };
+  
     return (
         <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
             <View style={styles.container}>
                 <View style={{ marginBottom: 10 }}>
                     <View style={{ flexDirection: "row", alignItems: "center", marginTop: 10, gap: 10 }}>
-                        <Image source={{ uri: "https://avatar.iran.liara.run/public/7" }} style={[styles.img, { alignSelf: "center" }]} />
+                        <Image source={{ uri: userInfo.image }} style={[styles.img,]} />
                         <View style={{}}>
                             <Text style={{ fontFamily: Theme.fonts.text600, fontSize: 18, alignSelf: "center", marginBottom: 5 }}>{userInfo.firstname} {userInfo.lastname}</Text>
                             <Button mode='contained' icon={"account-edit"} textColor='black' buttonColor={Theme.colors.primary + 30} onPress={() => { navigation.navigate("Editprofile") }}>Edit Profile</Button>
@@ -33,8 +41,9 @@ export function Profile({ navigation }) {
                     </View>
 
                     <View style={{ backgroundColor: Theme.colors.primary + 20, marginTop: 10, padding: 10, borderRadius: 10, marginBottom: 10 }}>
-                        <Text style={{ fontFamily: Theme.fonts.text400, marginVertical: 10, fontSize: 17, marginLeft: 10, borderBottomWidth: 0.3, borderColor: "gray" }}> Account Name:   {userInfo.firstname} {userInfo.lastname}</Text>
-                        <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 17, marginLeft: 10 }}> Account Number:   {userInfo.accountNumber}</Text>
+                        <Text style={{ fontFamily: Theme.fonts.text400, marginVertical: 10, fontSize: 17, marginLeft: 10, }}> Account Name:   {userInfo.firstname} {userInfo.lastname} </Text>
+                        <Text style={{ fontFamily: Theme.fonts.text400, fontSize: 17, marginLeft: 10 }}> Account Number:   {userInfo.accountNumber}   <MaterialCommunityIcons name="content-copy" size={24} color="black" onPress={copyToClipboard} />
+                        </Text>
                     </View>
 
                     <Text style={{ fontFamily: Theme.fonts.text500, fontSize: 17, marginTop: 10 }}>App</Text>
@@ -117,7 +126,9 @@ const styles = StyleSheet.create({
     img: {
         width: 100,
         height: 100,
-        borderRadius: 100
+        borderRadius: 100,
+        borderWidth:1,
+        borderColor: Theme.colors.border
     },
     view: {
         marginTop: 20,
